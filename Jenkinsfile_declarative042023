@@ -32,17 +32,20 @@ pipeline{
    stage('4UploadArtifacts') {
     steps{
       sh "echo configure nexus authentication"
-      //sh "mvn deploy"
+      sh "mvn deploy"
       sh "echo artifacts uploaded"
-    }
    }
-     stage('5deploy') {
+   }
+     stage('5.deployuat') {
     steps{
-      deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://100.26.217.86:8080/')], contextPath: null, war: 'target/*war'
-        }
+      deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://35.175.108.94:8177/manager/html')], contextPath: null, war: 'target/*.war'
+   }
    }
    
-   //stage('5deploy') {}
+   stage('5deploy') {
+   steps{
+   deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://35.175.108.94:8177/manager/html')], contextPath: null, war: 'target/*.war'
+   }
   }
 post{ 
     always{
