@@ -15,6 +15,7 @@ pipeline{
         sh "echo 'latest application version available for testing and build' "
       }
     }
+    }
     stage('2TestBuild'){
       steps{
         sh "echo 'running JUnit-test-cases' "
@@ -68,5 +69,5 @@ LandmarkTech ''', recipientProviders: [buildUser(), developers()], subject: 'Bui
     }
     
 }
-}
+
 
